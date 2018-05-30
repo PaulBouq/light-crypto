@@ -12,6 +12,12 @@
 *.toc
 *.xdy
 
+# Compiled with VS Code
+*.fls
+*.ilg
+*.ind
+*.fdb_latexmk
+
 # Ignore produced report
 rapport/rapport.pdf
 
