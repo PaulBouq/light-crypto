@@ -178,8 +178,41 @@ Une intro
 
 		Les variantes de SPONGENT peuvent être implémentées en utilisant entre 738 GE (pour SPONGENT 80/80/8) et 5100 GE (pour SPONGENT 256/512/256).
 		Ces nombres ne semblent peut-être pas très explicites, mais ils dénotent une très grande compacité de l’implémentation physique de l’algorithme.
+		Pour plus de détails, la figure \ref{espacePhysique} présente pour différentes variantes de l’algorithme l’espace physique nécessaire en fonction de la technologie (NXP, UMC et NANGATE)[11] :
+
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=\textwidth]{imgs/Spongent/espacePhysiqueVariante.png}
+			\caption{Espace physique nécessaire pour différentes variantes de SPONGENT}
+			\label{espacePhysique}
+		\end{figure}
+
 		Pour ce qui est du débit de traitement, il est donné comme variant entre 360 Mbps et 2 Gbps (en fonction de la variante de SPONGENT utilisée).
 		En comparaison, l’algorithme de hachage SHA-1 possède un débit de l’ordre d’ 1 Gbps [10].
+
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=\textwidth]{imgs/Spongent/timeComplexity.png}
+			\caption{Complexités en temps et en mémoire de SPONGENT}
+			\label{timeComplexity}
+		\end{figure}
+
+		En termes de sécurité, nous pouvons voir sur la figure \ref{timeComplexity} les différentes valeurs de complexité pour l’ensemble des variantes de SPONGENT.
+		Pour les variantes 88/80/8 et 128/128/8, il est intéressant de noter que nous sommes dans des capacités de calcul atteignables, et que de ce fait ces algorithmes ne sont pas « sûrs ».
+		Pour le reste, nous pouvons observer des complexités relatives au minimum inatteignable ($2^{80}$) voire raisonnablement inatteignable ($2^{128}$).
+		
+		Enfin, la figure \ref{attaquePreImage} présente les résultats de sécurité face aux attaques par pré-image, par 2\up{ème} pré-image et par collision [11].
+		L’attaque par pré-image consiste, à partir d’un haché $y$, à retrouver un $x$ tel que $h(x) = y$.
+		L’attaque par 2\up{ème} pré-image consiste quant à elle, à partir d’un clair $x$, à trouver $x’$ tel que $h(x) = h(x’)$.
+		Enfin, l’attaque par collision consiste à essayer de trouver deux clairs différents produisant le même chiffré.
+		Elle ressemble à l’attaque par 2\up{ème} pré-image à ceci près que le clair n’est pas spécifié.
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=\textwidth]{imgs/Spongent/attaquePreImage.png}
+			\caption{Attaque par pré-image et collision}
+			\label{attaquePreImage}
+		\end{figure}
 
 		%% TODO : integrer la biblio dans biber
 
