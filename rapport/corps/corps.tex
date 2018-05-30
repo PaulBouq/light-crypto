@@ -117,7 +117,7 @@ Une intro
 			\label{algoSpongent}
 			\begin{algorithmic}
 				\FOR{i = 1 to R}
-					\STATE $ STATE \leftarrow lCounter_{b}(i) \xor STATE \xor lCounter_{b}(i)$
+					\STATE $ STATE \leftarrow $ \reflectbox{$lCounter_{b}$}$(i) \xor STATE \xor lCounter_{b}(i)$
 					\STATE $ STATE \leftarrow sBoxLayer_{b}(STATE)$
 					\STATE $ STATE \leftarrow pLayer_{b}(STATE)$
 				\ENDFOR
