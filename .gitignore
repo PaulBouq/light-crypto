@@ -17,6 +17,7 @@
 *.ilg
 *.ind
 *.fdb_latexmk
+*.gz
 
 # Ignore produced report
 rapport/rapport.pdf
