@@ -17,27 +17,79 @@
 	\newpage
 
 \newpage
-\part{Partie 1}
+\part{Introduction à la cryptographie légère}
 
 
-	\section{Section 1}
+	\section{Généralités}
 
-		Une section
 
-		Une liste:
-		\begin{itemize}
-	    \item[•] Item 1
-	    \item[•] Item 2
-	    \item Item 3 sans bullet
-	  \end{itemize}
 
-		\subsection{Sous section 1}
+\part{Présentation de deux algorithmes de cryptographie légère}
 
-			Une sous section
-			% \cite{une_source} % on cite comme ça en faisant référence à une entrée
-			% du fichier bib/biblatex.bib
+	\section{SPONGENT}
 
-			Une référence: \cite{ref_techreport}
+		\subsection{Fonctionnement général de SPONGENT}
+
+		\subsection{Fonctionnement détaillé de SPONGENT 160 / 160 / 80}
+
+
+		\subparagraph{Performances et sécurité}
+
+	\section{Speck}
+
+			Speck est un algorithme de chiffrement par bloc léger crée par la NSA et rendu
+		publique en 2013. C'est un algorithme spécialement conçu pour avoir des performances
+		élevées afin d'offrir un algorithme de chiffrement utilisable dans le cadre de
+		"l'Internet of Things".
+
+		\subsection{Algorithmes ARX}
+
+				Cet algorithme fait parti des algorithmes dits ARX, Add-Rotate-Xor. C'est une famille
+			d'algorithmes qui n'utilisent que les opérations d'additions, rotations et ou exclusif
+			dans l'espace $GF_{2^n}$. Il y a plusieurs avantages à se limiter à ces opérations:
+
+			\begin{enumerate}
+			\item[•] Rapidité: ces opérations sont des opérations logiques. Ainsi, elles sont
+				des primitives de tout micro-controlleur et donc sont effectué en un seul
+				cycle d'horloge.
+			\item[•] Sécurité matérielle: le fait que toutes les opérations soient des opérations
+				logiques atomiques permet à ces algorithmes de fonctionner en temps constant.
+				Prévenant les attaques par canaux cachés basés sur les mesures de temps.
+			\item[•] Implémentation: ces algorithmes sont souvent très simples. Leur implémentation
+				qu'elle soit logicielle ou matérielle est très simple. Par conséquent, le
+				temps de développement et le coût de leur implémentation est très faible.
+			\end{enumerate}
+
+		\subsection{Fonctionnement de Speck}
+
+			Avant de détailler comment fonctionne Speck, considérons les notations suivantes:
+
+			\begin{enumerate}
+			  \item[•] Le ou-exclusif bit à bit, noté xor
+			  \item[•] L'addiction modulo $2^n$, noté $\xor$
+			  \item[•] Les rotations circulaires à gauche et à droite respectivement notées,
+			    $S^i$ et $S^{-i}$ pour des rotations de i-bits.
+			\end{enumerate}
+
+			Un tour de chiffrement de l'algorithme Speck est définit de la façon suivante. \\
+			Pour $k \in GF(2^n)$ une clée, le tour de chiffrement est définit par la fonction suivante:
+			\[
+			\begin{array}{ccccc}
+			R_k & : & GF(2^n) x GF(2^n) & \to & GF(2^n) x GF(2^n) \\
+			 & & (x,y) & \mapsto & ((S^{-\alpha}(x) + y) \xor k, S^\beta (y) \xor (S^{-\alpha} + y) \xor k) \\
+			\end{array}
+			\]
+
+			avec $\alpha$ = 7 et $\beta$ = 2 si n = 16, $\alpha $= 8 et $\beta$ = 3 sinon. \\
+
+			La fonction de déchiffrement est définie par:
+			\[
+			\begin{array}{ccccc}
+			R_k^{-1} & : & GF(2^n) x GF(2^n) & \to & GF(2^n) x GF(2^n) \\
+			 & & (x,y) & \mapsto & (S^\alpha ((x \xor k) - S^{-\beta}(x \xor y)), S^{-\beta}(x \xor y)) \\
+			\end{array}
+			\]
+
 
 \newpage
 \part*{Conclusion}
