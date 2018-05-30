@@ -43,3 +43,7 @@ rapport/rapport.pdf
 *.exe
 *.out
 *.app
+
+# pythonic files
+__pycache__
+*.pyc
