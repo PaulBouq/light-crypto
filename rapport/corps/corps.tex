@@ -78,27 +78,52 @@ Une intro
 	et il a la particularité d’avoir été inclus au dernier standard international des méthodes de cryptographie légère par l’ « International Electrotechnical Commission » [3].
 
 		\subsection{Fonctionnement général de SPONGENT}
-		% image 1
+
+		\begin{figure}[h]
+			 	\centering
+			 	\includegraphics[scale=0.8]{imgs/Spongent/fctGlobalSpongent.png}
+			 	\caption{Schéma illustrant le fonctionnement de SPONGENT, tiré de [1]}
+			 	\label{fctGlobalSpongent}
+		\end{figure}
+
 		Comme énoncé précédemment, SPONGENT s’appuie sur le fonctionnement de l’algorithme PRESENT.
 		Pour un nombre fini de bits en entrée, SPONGENT va produire un hach de taille n (fixé).
-		La figure 1 schématise le fonctionnement de l’algorithme, qui s’organise en trois phases distinctes, que sont l’initialisation, l’absorption (absorbing) et le relâchement (squeezing).
+		La figure \ref{fctGlobalSpongent} schématise le fonctionnement de l’algorithme, qui s’organise en trois phases distinctes, que sont l’initialisation, l’absorption (absorbing) et le relâchement (squeezing).
 
 		L’initialisation consiste à ajouter un 1 binaire suivi de x 0 afin que la taille du message en entrée soit un multiple de la taille des blocs, appelé r (rate en anglais).
-		Le message est ensuite découpé en blocs de r bits. Ensuite vient la phase d’absorption.
+		Le message est ensuite découpé en blocs de r bits.
+		Ensuite vient la phase d’absorption.
 		Durant cette phase, un bloc mi subit un XOR avec les r premiers bits de l’état courant et passe ensuite dans la fonction de permutation.
-		Cette permutation génère un état de b bits, où b = r + c, et où c est appelé la capacité de l’état et b est appelé la largeur de l’état.
+		Cette permutation génère un état de b bits, où $b = r + c$, et où c est appelé la capacité de l’état et b est appelé la largeur de l’état.
 		Enfin, la phase de relâchement consiste à retourner les r premiers bits de l’état, puis de passer l’état dans la fonction de permutation,
 		et de répéter ces deux opérations jusqu’à ce que le hach retourné ait une longueur de n bits.
 
-		Les valeurs de n, b, c et r ne sont pas prises au hasard. En effet, il existe treize versions différentes de SPONGENT et elles sont définies grâce au tableau représenté à la figure 2.
+		Les valeurs de n, b, c et r ne sont pas prises au hasard. En effet, il existe treize versions différentes de SPONGENT et elles sont définies grâce au tableau représenté à la figure \ref{variantesSpongent}.
 		Ces treize versions s’appuient sur des hachés de tailles différentes, mais les valeurs des trois autres constantes citées ci-avant diffèrent elles-aussi selon la version utilisée.
 		Dans le cas de notre projet, nous avons décidé d’implémenter SPONGENT 160/160/80.
-
-		% image 2		
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=\textwidth]{imgs/Spongent/varianteSpongent.png}
+			\caption{Tableau définissant  les 13 variantes de SPONGENT, tiré de [1]}
+			\label{variantesSpongent}
+   		\end{figure}
 
 		\subsection{Fonctionnement détaillé de SPONGENT 160 / 160 / 80}
-		Cette sous-partie va permettre d’expliquer le fonctionnement détaillé de la permutation notée b??. Cette permutation est définie par l’algorithme représenté à la figure 3 :
-		% image 3
+		Cette sous-partie va permettre d’expliquer le fonctionnement détaillé de la permutation notée $\pi_{b}$.
+		Cette permutation est définie par l’algorithme \ref{algoSpongent}:
+		\begin{algorithm}
+			\caption{Algorithme de permutation de SPONGENT}
+			\label{algoSpongent}
+			\begin{algorithmic}
+				\FOR{i = 1 to R}
+					\STATE $ STATE \leftarrow lCounter_{b}(i) \xor STATE \xor lCounter_{b}(i)$
+					\STATE $ STATE \leftarrow sBoxLayer_{b}(STATE)$
+					\STATE $ STATE \leftarrow pLayer_{b}(STATE)$
+				\ENDFOR
+			\end{algorithmic}
+		\end{algorithm}
+
 		Tout d’abord, intéressons-nous aux variables de cet algorithme.
 		La variable R est le nombre de rondes de l’algorithme. Il varie en fonction de la variante de SPONGENT utilisée, et dans notre cas R vaut 80.
 		Ensuite, la variable STATE représente l’état courant.
@@ -106,14 +131,48 @@ Une intro
 		La première opération appliquée à STATE est un XOR avec d’une part lCounterb(i) et d’autre part la valeur « retournée » de lCounterb(i),
 		c’est-à-dire que si lCounterb(i) = 1000 sa valeur « retournée » est 0001. lCounterb(i) est en réalité un LFSR, ou Registre à décalage à rétroaction linéaire,
 		soit un générateur pseudo-aléatoire qui dépend lui aussi de la variante de l’algorithme utilisée.
-		La figure 5 illustre les polynômes générateurs du LFSR, et la figure 4 indique les valeurs initiales que prend le LFSR.
-		% image 4 | image 5
+		La figure \ref{polyPrimitifsLFSR} illustre les polynômes générateurs du LFSR, et la figure \ref{valInitLFSR} indique les valeurs initiales que prend le LFSR.
+
+		\begin{figure}[!htb]
+			\begin{minipage}{0.48\textwidth}
+			  \centering
+			  \includegraphics[width=\textwidth]{imgs/Spongent/PrimiPolySpongent.png}
+			  \caption{Polynômes primitifs du LFSR}
+			  \label{polyPrimitifsLFSR}
+			\end{minipage}
+			\hfill
+			\begin {minipage}{0.48\textwidth}
+			  \centering
+			  \includegraphics[width=\textwidth]{imgs/Spongent/valInitLFSR.png}
+			  \caption{Valeurs initiales du LFSR}
+			  \label{valInitLFSR}
+			\end{minipage}
+		 \end{figure}
 		La deuxième opération de la ronde est de passer STATE dans une S-Box.
-		La S-Box est la même pour toutes les variantes de l’algorithme SPONGENT et elle est définie par la figure 6 :
-		% image 6
-		Enfin, la troisième et dernière opération est de passer STATE dans pLayerb.
-		pLayerb est une fonction de permutation définie comme l’inverse de la permutation de bits de l’algorithme PRESENT. Ainsi, chaque bit j est permuté avec le bit de position Pb(j) où :
-		% formule
+		La S-Box est la même pour toutes les variantes de l’algorithme SPONGENT et elle est définie par la figure \ref{sBoxSpongent.png} :
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=\textwidth]{imgs/Spongent/sBoxSpongent.png}
+			\caption{S-Box de l'algorithme SPONGENT}
+			\label{sBoxSpongent.png}
+		\end{figure}
+		   
+		Enfin, la troisième et dernière opération est de passer STATE dans $pLayer_{b}$.
+		$pLayer_{b}$ est une fonction de permutation définie comme l’inverse de la permutation de bits de l’algorithme PRESENT.
+		Ainsi, chaque bit j est permuté avec le bit de position $P_{b}(j)$ où :
+
+		\begin{figure}[htbp]
+			\centering
+		\begin{equation}
+			P_{b}(j) = \begin{cases}
+			  j \cdot \frac{b}{4} \bmod b - 1, if j \in {0, \dots, b - 2}\\
+			  b - 1, \text{if j = b - 1}.
+			\end{cases}
+		  \end{equation}
+		  \caption{Formule de permutation de pLayer}
+			\label{pLayer}
+		\end{figure}
 
 		\subparagraph{Performances et sécurité}
 
