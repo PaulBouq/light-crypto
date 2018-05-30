@@ -93,7 +93,7 @@ Une intro
 		L’initialisation consiste à ajouter un 1 binaire suivi de x 0 afin que la taille du message en entrée soit un multiple de la taille des blocs, appelé r (rate en anglais).
 		Le message est ensuite découpé en blocs de r bits.
 		Ensuite vient la phase d’absorption.
-		Durant cette phase, un bloc mi subit un XOR avec les r premiers bits de l’état courant et passe ensuite dans la fonction de permutation.
+		Durant cette phase, un bloc $m_{i}$ subit un XOR avec les r premiers bits de l’état courant et passe ensuite dans la fonction de permutation.
 		Cette permutation génère un état de b bits, où $b = r + c$, et où c est appelé la capacité de l’état et b est appelé la largeur de l’état.
 		Enfin, la phase de relâchement consiste à retourner les r premiers bits de l’état, puis de passer l’état dans la fonction de permutation,
 		et de répéter ces deux opérations jusqu’à ce que le hach retourné ait une longueur de n bits.
@@ -214,8 +214,6 @@ Une intro
 			\label{attaquePreImage}
 		\end{figure}
 
-		%% TODO : integrer la biblio dans biber
-
 		\section{Speck}
 
 			Speck est un algorithme de chiffrement par bloc léger crée par la NSA et rendu
@@ -271,7 +269,10 @@ Une intro
 			\end{array}
 			\]
 
+	\section{Domaines d'applications}
 
+
+	
 \newpage
 \part*{Conclusion}
 
