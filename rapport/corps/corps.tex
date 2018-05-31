@@ -86,10 +86,11 @@
 \part{Présentation de deux algorithmes de cryptographie légère}
 
 	\section{SPONGENT}
-	Cette partie a pour objectif de présenter l’algorithme de cryptographie légère SPONGENT.
-	Il découle directement de l’algorithme PRESENT, développé en 2007 par « Orange Labs », la « Ruhr University Bochum » et la « Technical  University of Denmark ».
-	Ce dernier est un algorithme par blocs (de 64 bits) dont la clé fait 80 ou 128 bits [2],
-	et il a la particularité d’avoir été inclus au dernier standard international des méthodes de cryptographie légère par l’ « International Electrotechnical Commission » [3].
+
+			Cette partie a pour objectif de présenter l’algorithme de cryptographie légère SPONGENT.
+		Il découle directement de l’algorithme PRESENT, développé en 2007 par « Orange Labs », la « Ruhr University Bochum » et la « Technical  University of Denmark ».
+		Ce dernier est un algorithme par blocs (de 64 bits) dont la clé fait 80 ou 128 bits [2],
+		et il a la particularité d’avoir été inclus au dernier standard international des méthodes de cryptographie légère par l’ « International Electrotechnical Commission » [3].
 
 			Cette partie a pour objectif de présenter l’algorithme de cryptographie légère
 		SPONGENT. Il découle directement de l’algorithme PRESENT, développé en 2007 par «
@@ -101,9 +102,9 @@
 
 		\subsection{Fonctionnement général de SPONGENT}
 
-		\begin{figure}[h]
+		\begin{figure}[!h]
 			 	\centering
-			 	\includegraphics[width=\textwidth]{imgs/Spongent/fctGlobalSpongent.png}
+			 	\includegraphics[width=0.9\textwidth]{imgs/Spongent/fctGlobalSpongent.png}
 			 	\caption{Schéma illustrant le fonctionnement de SPONGENT, tiré de [1]}
 			 	\label{fctGlobalSpongent}
 		\end{figure}
@@ -124,9 +125,9 @@
 		Ces treize versions s’appuient sur des hachés de tailles différentes, mais les valeurs des trois autres constantes citées ci-avant diffèrent elles-aussi selon la version utilisée.
 		Dans le cas de notre projet, nous avons décidé d’implémenter SPONGENT 160/160/80.
 
-		\begin{figure}[h]
+		\begin{figure}[!h]
 			\centering
-			\includegraphics[width=\textwidth]{imgs/Spongent/varianteSpongent.png}
+			\includegraphics[width=0.9\textwidth]{imgs/Spongent/varianteSpongent.png}
 			\caption{Tableau définissant  les 13 variantes de SPONGENT, tiré de [1]}
 			\label{variantesSpongent}
    		\end{figure}
@@ -158,14 +159,14 @@
 		\begin{figure}[!htb]
 			\begin{minipage}{0.48\textwidth}
 			  \centering
-			  \includegraphics[width=\textwidth]{imgs/Spongent/PrimiPolySpongent.png}
+			  \includegraphics[width=0.9\textwidth]{imgs/Spongent/PrimiPolySpongent.png}
 			  \caption{Polynômes primitifs du LFSR}
 			  \label{polyPrimitifsLFSR}
 			\end{minipage}
 			\hfill
 			\begin {minipage}{0.48\textwidth}
 			  \centering
-			  \includegraphics[width=\textwidth]{imgs/Spongent/valInitLFSR.png}
+			  \includegraphics[width=0.9\textwidth]{imgs/Spongent/valInitLFSR.png}
 			  \caption{Valeurs initiales du LFSR}
 			  \label{valInitLFSR}
 			\end{minipage}
@@ -173,9 +174,9 @@
 		La deuxième opération de la ronde est de passer STATE dans une S-Box.
 		La S-Box est la même pour toutes les variantes de l’algorithme SPONGENT et elle est définie par la figure \ref{sBoxSpongent.png} :
 
-		\begin{figure}[h]
+		\begin{figure}[!h]
 			\centering
-			\includegraphics[width=\textwidth]{imgs/Spongent/sBoxSpongent.png}
+			\includegraphics[width=0.9\textwidth]{imgs/Spongent/sBoxSpongent.png}
 			\caption{S-Box de l'algorithme SPONGENT}
 			\label{sBoxSpongent.png}
 		\end{figure}
@@ -184,7 +185,7 @@
 		$pLayer_{b}$ est une fonction de permutation définie comme l’inverse de la permutation de bits de l’algorithme PRESENT.
 		Ainsi, chaque bit j est permuté avec le bit de position $P_{b}(j)$ où :
 
-		\begin{figure}[htbp]
+		\begin{figure}[!htbp]
 			\centering
 		\begin{equation}
 			P_{b}(j) = \begin{cases}
@@ -204,7 +205,7 @@
 
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=\textwidth]{imgs/Spongent/espacePhysiqueVariante.png}
+			\includegraphics[width=0.9\textwidth]{imgs/Spongent/espacePhysiqueVariante.png}
 			\caption{Espace physique nécessaire pour différentes variantes de SPONGENT}
 			\label{espacePhysique}
 		\end{figure}
@@ -214,7 +215,7 @@
 
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=\textwidth]{imgs/Spongent/timeComplexity.png}
+			\includegraphics[width=0.9\textwidth]{imgs/Spongent/timeComplexity.png}
 			\caption{Complexités en temps et en mémoire de SPONGENT}
 			\label{timeComplexity}
 		\end{figure}
@@ -231,7 +232,7 @@
 
 		\begin{figure}[!h]
 			\centering
-			\includegraphics[width=\textwidth, height=0.3\textheight]{imgs/Spongent/attaquePreImage.png}
+			\includegraphics[width=0.9\textwidth, height=0.3\textheight]{imgs/Spongent/attaquePreImage.png}
 			\caption{Attaque par pré-image et collision}
 			\label{attaquePreImage}
 		\end{figure}
@@ -293,6 +294,43 @@
 			 & & (x,y) & \mapsto & (S^\alpha ((x \xor k) - S^{-\beta}(x \xor y)), S^{-\beta}(x \xor y)) \\
 			\end{array}
 			\]
+
+			On peut représenter un tour de Speck de la façon suivante:
+
+			\begin{figure}[!h]
+				\centering
+				\includegraphics[width=0.9\textwidth]{imgs/roundSpeck.png}
+				\caption{i-ème tour de Speck}
+			 	\label{roundSpeck}
+			\end{figure}
+
+			\vspace{0.3cm}
+
+			Speck pour utiliser un grand nombre de tailles de blocs ainsi que de clées.
+
+			\vspace{0.5cm}
+
+			\begin{figure}[!h]
+				\centering
+				\begin{tabular}{cc}
+					taille de bloc & taille de clée \\
+					\hline
+					32 & 64 \\
+					\hline
+					48 & 72,96 \\
+					\hline
+					64 & 96,128 \\
+					\hline
+					96 & 96,144 \\
+					\hline
+					128 & 128,192,256 \\
+					\hline
+				\end{tabular}
+				\caption{Taille de blocs/clées possible pour Speck}
+			 	\label{tailleSpeck}
+			\end{figure}
+
+			\vspace{0.5cm}
 
 
 \newpage
