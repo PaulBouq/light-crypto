@@ -218,7 +218,7 @@
 				\label{pLayer}
 			\end{figure}
 
-		\subparagraph{Performances et sécurité}
+		\section{Performances et sécurité}
 
 			Les variantes de SPONGENT peuvent être implémentées en utilisant entre 738
 		GE (pour SPONGENT 80/80/8) et 5100 GE (pour SPONGENT 256/512/256). Ces
@@ -309,61 +309,120 @@
 			    $S^i$ et $S^{-i}$ pour des rotations de i-bits.
 			\end{enumerate}
 
-			Un tour de chiffrement de l'algorithme Speck est définit de la façon suivante. \\
+			Un tour de chiffrement de l'algorithme Speck est définit de la façon suivante \cite{speck_families}. \\
 			Pour $k \in GF(2^n)$ une clée, le tour de chiffrement est définit par la fonction suivante:
-			\[
-			\begin{array}{ccccc}
-			R_k & : & GF(2^n) x GF(2^n) & \to & GF(2^n) x GF(2^n) \\
-			 & & (x,y) & \mapsto & ((S^{-\alpha}(x) + y) \xor k, S^\beta (y) \xor (S^{-\alpha} + y) \xor k) \\
-			\end{array}
-			\]
 
-			avec $\alpha$ = 7 et $\beta$ = 2 si n = 16, $\alpha $= 8 et $\beta$ = 3 sinon. \\
+			\begin{figure}[H]
+				\centering
+				\[
+				\begin{array}{ccccc}
+				R_k & : & GF(2^n)^2 & \to & GF(2^n)^2 \\
+				 & & (x,y) & \mapsto & ((S^{-\alpha}(x) + y) \xor k, S^\beta (y) \xor (S^{-\alpha} + y) \xor k) \\
+				\end{array}
+				\]
+				\caption{Fonction tour de Speck}
+				\label{tourSpeck}
+			\end{figure}
+
+
+
+			avec $\alpha$ et $\beta$ des paramêtres dépendants de la taille des blocs utilisés. \\
 
 			La fonction de déchiffrement est définie par:
-			\[
-			\begin{array}{ccccc}
-			R_k^{-1} & : & GF(2^n) x GF(2^n) & \to & GF(2^n) x GF(2^n) \\
-			 & & (x,y) & \mapsto & (S^\alpha ((x \xor k) - S^{-\beta}(x \xor y)), S^{-\beta}(x \xor y)) \\
-			\end{array}
-			\]
 
-			On peut représenter un tour de Speck de la façon suivante:
-
-			\begin{figure}[!h]
+			\begin{figure}[H]
 				\centering
-				\includegraphics[width=0.9\textwidth]{imgs/roundSpeck.png}
+				\[
+				\begin{array}{ccccc}
+				R_k^{-1} & : & GF(2^n)^2 & \to & GF(2^n)^2 \\
+				 & & (x,y) & \mapsto & (S^\alpha ((x \xor k) - S^{-\beta}(x \xor y)), S^{-\beta}(x \xor y)) \\
+				\end{array}
+				\]
+				\caption{Fonction inverse tour de Speck}
+				\label{tourSpeck}
+			\end{figure}
+
+
+			On peut également représenter un tour de Speck de la façon suivante:
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.8\textwidth]{imgs/roundSpeck.png}
 				\caption{i-ème tour de Speck}
 			 	\label{roundSpeck}
 			\end{figure}
 
 			\vspace{0.3cm}
 
-			Speck pour utiliser un grand nombre de tailles de blocs ainsi que de clées.
+			La clef initiale est dérivée par une fonction de dérivation qui utilise la
+			fonction de tour de chiffrement. Considérons une clée de m mots ($m\in {2,3,4}$),
+			on peut écrire $ K = (l_{m-2},k_{m-2}, ..., l_0,k_0)$, les clées $k_i$ issues
+			de l'extension de la clée sont définies par:
+
+			\begin{figure}[H]
+				\centering
+				\[
+					l_{i+m-1} = (l_i + S^{-\alpha}(l_i)) \xor i
+				\]
+				\[
+					k_{i+1} = S^\beta (k_i) \xor l_{i+m-1}
+				\]
+				\caption{Fonction inverse tour de Speck}
+				\label{tourSpeck}
+			\end{figure}
+
+				Plusieurs paramêtres entrent en jeu dans l'algorithme complet. À savoir
+			la taille de bloc, la taille de la clef, la taille des mots utilisés,
+			le nombre de tours, $\alpha$ et $\beta$. On dispose de plusieurs variantes
+			de Speck en faisant varier ces paramêtres parmi ceux suggérés par la NSA \cite{speck_iot}:
+
+
 
 			\vspace{0.5cm}
 
-			\begin{figure}[!h]
+			\begin{figure}[H]
 				\centering
-				\begin{tabular}{cc}
-					taille de bloc & taille de clée \\
+				\bgroup
+				\def\arraystretch{1.2}
+				\begin{tabular}{ccc|cc|c}
+					taille de bloc & taille de clée & taille de mot & $\alpha$ & $\beta$ & nombre de tours \\
 					\hline
-					32 & 64 \\
+					32 & 64  & 16 & 7 & 2 & 22 \\
 					\hline
-					48 & 72,96 \\
+					48 & 72  & 24 & 8 & 3 & 22 \\
+					48 & 96  &  & & & 23 \\
 					\hline
-					64 & 96,128 \\
+					64 & 96  & 32 & 8 & 3 & 26 \\
+					64 & 128 & &  & & 27 \\
 					\hline
-					96 & 96,144 \\
+					96 & 96  & 48 & 8 & 3 & 28 \\
+					96 & 144 & & & & 29 \\
 					\hline
-					128 & 128,192,256 \\
-					\hline
+					128 & 128 & 64 & 8 & 3 & 32 \\
+					128 & 192 & & & & 33 \\
+					128 & 256 & & & & 34 \\
 				\end{tabular}
+				\egroup
 				\caption{Taille de blocs/clées possible pour Speck}
 			 	\label{tailleSpeck}
 			\end{figure}
 
 			\vspace{0.5cm}
+
+		\subsection{Performance et sécurité}
+
+			Speck n'a pas été conçu spécifiquement pour atteindre des grandes
+			performances \cite{speck_families}. Comme on peut le constater sur la figure
+			\ref{perfSpeck}, Speck est bien plus lent que AES-256 qui exploite les
+			accélérations matérielles AES-NI disponibles sur les processeurs récent.
+			Ce résultat n'est pas étonent
+
+			\begin{figure}[!h]
+				\centering
+				\includegraphics[width=0.8\textwidth]{imgs/perfSpeck.png}
+				\caption{Nombre de cycles/octet pour des messages allant de 1 à 4096 octets sur Intel Xeon E5640 \cite{speck_micro}}
+				\label{perfSpeck}
+			\end{figure}
 
 
 
