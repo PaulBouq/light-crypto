@@ -29,10 +29,6 @@ class Speck:
             self.decalageAlpha = 8
 
 
-        self.iv = vecteurInitial & ((2 ** self.tailleBloc) - 1)
-        self.iv1 = self.iv >> self.tailleMot
-        self.iv2 = self.iv & self.masque
-
         self.counter = counter & ((2 ** self.tailleBloc) - 1)
 
         self.key = key & ((2 ** self.tailleClef) - 1)
@@ -95,10 +91,6 @@ class Speck:
 
         return x2, y2
 
-    def update_iv(self, new_iv):
-        self.iv = new_iv & ((2 ** self.tailleBloc) - 1)
-        self.iv1 = self.iv >> self.tailleMot
-        self.iv2 = self.iv & self.masque
 
 
 def testPerformance():
