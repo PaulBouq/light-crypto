@@ -365,7 +365,77 @@
 
 			\vspace{0.5cm}
 
+			\section{Domaines d'application}
 
+			\subsection{Introduction}
+
+
+			Depuis quelques années, nous pouvons apercevoir un changement dans la puissance des appareils électroniques.
+			En effet, on passe d'ordinateur à usage général à des appareils dédiés avec des resources limités.
+			Ce changement apporte un large éventail de préoccupations en matière de sécurité et de protection de la vie privée.
+			C'est pourquoi il est nécessaire de créer de nouveau standards spécialement adaptés à ces conditions.
+			
+			Ces nouveaux standards visent essentiellement à utiliser le minimum de GE tout en gardant un niveau de sécurité accceptable pour les applications visées.
+			Les questions de consommation de puissance et de rapidité sont aussi à prendre en compte.
+			En effet, ces appareils seront destinés à communiquer avec d'autres au sein d'un réseau ou utiliser des batteries.
+			
+			Il y a déjà plusieurs domaines dans lesquels de tels appareils sont interconnectés and travaillent de concert pour accomplir certaines tâches.
+			Comme par exemple : les réseaux de capteurs, les systèmes de contrôles distribués, l'Internet Of Thigs (IoT), le « smart grid », les systèmes embarqués ou encore les dispositifs RFID.
+			
+			\subsection{Chiffrement de flux}
+			
+			Dans cette partie, on s'intéressera uniquement aux aux méthodes de chiffrement de flux.
+			Le chiffrement par flot est caractérisé par sa capacité à « chiffrer les caractères (généralement des chiffres binaires) d'un message en clair, un à la fois,
+			en utilisant une transformation de chiffrement qui varie avec le temps »\cite{appliedCrypto}.
+			
+			\begin{figure}[!h]
+				\centering
+				\includegraphics[width=0.9\textwidth]{imgs/application/A5.png}
+				\caption{Fonctionnement de l'algorithme A5/1.}
+				\label{algoA5}
+			\end{figure}
+			
+			Les méthodes de chiffrement de flux sont naturellment utilisées dans les domaines des télécommunications et de l'audiovisuel.
+			Par exemple, les communications qui utilisent le protocole 2G GSM sont chiffrés par l'algorithme A5/1.
+			A5/1 est largment utilisé en Europe et aux État-Uni et permet à plus de 7 milliards de téléphone de communiquer de manière sécurisé\cite{7milliards}.
+			Les communications de téléphonie par satellite posssèdent souvent aussi leurs algorithme de chiffrement.
+			De tels algorithmes sont jalousement gardés par les constructeurs et peu d'entre eux ont été percé à jour, que ce soit avec des attaques classiques ou du « reverse engineering ».
+			
+			Des algorithmes de chiffrement de flux sont aussi utilisés lors de la lecture de contenu sur certains dvd. Ces dvd sont souvent chiffrés avec l'algorithme Content Scrambling System (Css).
+			Ce genre d'algorithme a été développé pour implémenter les Digital Rights Managements (DRM). Ces mesures permettent de protéger à la fois l'accès au contenu mais aussi contre les systèmes de copie.
+			
+			\subsection{Chiffremment par bloc}
+			
+			La deuxième grande famille de méthode de chiffrement est le chiffrement par bloc. Il consiste à découper les données à chiffrer en blocs puis de chiffrer ces blocs.
+			Le, très connu, AES est un algorithme de chiffrement par bloc.
+			
+			\begin{figure}[!h]
+				\centering
+				\includegraphics[width=0.9\textwidth]{imgs/application/IOT.jpg}
+				\label{IOT}
+			\end{figure}
+			
+			Les deux algorithmes présentés dans les parties précédentes sont des méthodes de chiffrement par blocs.
+			Speck a été dévloppé, depuis 2012, par la NSA et optimisé pour une utilisation logicielle, tandis que sa contrepartie, Simon, a été optimisé pour une utilisation matérielle.
+			De plus, il offre de très bonnes performances même sur des machines à faible puissance de calcul.
+			En effet, il peut être implémenté sur des microcontrolleurs de 8 bits.
+			Cet algorithme a été développé en vue d'être intégré dans des objets de l'« Internet Of Things ».
+			Enfin, Linux a ajouté le support SPECK pour un cryptage efficace et opportuniste sur les périphériques à faibles ressources au noyau en février 2018.
+			
+			Mais de nombreuses voix s'élèvent contre la NSA et leurs algorithmes, notamment l'ISO (International Organization for Standardization).
+			L'organisation internationale n'a pas confiance en la NSA et ses bonnes intentions.
+			Saa crédibilité est fortement réduite après l'affaire Snowden et les preuves accusant l'agence de sécurité américaine d'avoir poussé la standardisation d'un algorithme de chiffrement (Dual EC DRBG) qui s'est révélé, plus tard, être « back-doored »\cite{NSABackdoor}.
+			
+			Un autre algorithme de chiffrement par bloc utilisé de manière commerciale est l'algorithme Cryptomeria, souvent appelé « C2 » dans la littérature.
+			Il est utilisé dans les lecteurs de dvd et des cartes SD. Il peut être vu comme le successeur de Css car il vise à remplir la même fonction, c'est-à-dire protéger l'accès au contenu et lutter contre les systèmes de copie.
+			
+			\subsection{Conclusion}
+			
+			Il y a deux grandes familles d'algorithmes de chiffrement : de flux et par bloc.
+			On retrouve les deux types d'algorithmes dans des domaines variés comme les télécommunications, l'audiovisuel, \dots
+			
+			Le chiffrement de flux semble être privilégié car il permettrait de sécuriser la communication des objets interconnectés de l'« Internet Of Things », le défi technologique des décennies à venir.
+			Cet attrait est d'autant plus accentué par l'engouement de grandes institutions américaines sur le sujet comme la NSA, avec ses deux algorithmes Speck et Simon, et la NIST (National Institute of Standards and Technology) qui organisent des ateliers sur le sujet.
 
 \newpage
 \part*{Conclusion}
