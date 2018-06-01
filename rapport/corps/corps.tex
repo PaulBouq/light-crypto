@@ -365,9 +365,9 @@
 
 			\vspace{0.5cm}
 
-			\section{Domaines d'application}
+			\part{Domaines d'application}
 
-			\subsection{Introduction}
+			\section{Introduction}
 
 
 			Depuis quelques années, nous pouvons apercevoir un changement dans la puissance des appareils électroniques.
@@ -382,7 +382,7 @@
 			Il y a déjà plusieurs domaines dans lesquels de tels appareils sont interconnectés and travaillent de concert pour accomplir certaines tâches.
 			Comme par exemple : les réseaux de capteurs, les systèmes de contrôles distribués, l'Internet Of Thigs (IoT), le « smart grid », les systèmes embarqués ou encore les dispositifs RFID.
 			
-			\subsection{Chiffrement de flux}
+			\section{Chiffrement de flux}
 			
 			Dans cette partie, on s'intéressera uniquement aux aux méthodes de chiffrement de flux.
 			Le chiffrement par flot est caractérisé par sa capacité à « chiffrer les caractères (généralement des chiffres binaires) d'un message en clair, un à la fois,
@@ -429,7 +429,7 @@
 			Un autre algorithme de chiffrement par bloc utilisé de manière commerciale est l'algorithme Cryptomeria, souvent appelé « C2 » dans la littérature.
 			Il est utilisé dans les lecteurs de dvd et des cartes SD. Il peut être vu comme le successeur de Css car il vise à remplir la même fonction, c'est-à-dire protéger l'accès au contenu et lutter contre les systèmes de copie.
 			
-			\subsection{Conclusion}
+			\section{Conclusion}
 			
 			Il y a deux grandes familles d'algorithmes de chiffrement : de flux et par bloc.
 			On retrouve les deux types d'algorithmes dans des domaines variés comme les télécommunications, l'audiovisuel, \dots
@@ -440,4 +440,22 @@
 \newpage
 \part*{Conclusion}
 
-		La conlusion
+La cryptographie légère est une branche de la cryptopgraphie apparue récemment et qui s'est développé avec l'apparition de nouveaux appareils éléctroniques de puissances moindres que les ordinateurs classiques.
+Commes leurs puissances est plus faibles les algorithmes classiques (RSA, AES) sont trop coûteux pour ces appareils, il a donc fallu passer à des algorithmes plus « léger » et mieux adaptés à ces appareils.
+Il faut tout de même noter que ces algorithmes présentent, par design, des faiblesses à certaines attaques.
+Deux algorithmes de chiffrement par bloc ont été présentés dans ce rapport : Spongent et Speck.
+
+Spongent s'appuie sur l'algorithme PRESENT qui a été inclus au dernier standard international des méthodes de cryptographie légère par l’ « International Electrotechnical Commission ».
+Il en existe treize variantes, dont SPONGENT 160 / 160 / 80 que nous avons implementé en python.
+Cet algorithme peut être implementé en utilisant entre 738 et 5100 GE, ce qui montre la compacité physique des implementations.
+Les algorithmes de cryptographie légère se démarquent aussi par leurs débits élévés. Pour le SPONGENT, on peut atteindre 2Gps.
+En comparaison, SHA-1 a un débit de l'ordre de 1Gps.
+En termes de sécurité, pour certaines variantes sont « sûrs » tandis que d'autres ne le sont pas (88/80/8 et 128/128/8).
+
+Le 2\up{ème} algorithme est Speck, développé par la NSA et rendu publique en 2013. Il a été spécialement conçus pour être utilisé dans le cadre de l'« Internet Of Things ».
+Tout comme Spongent, Speck peut utiliser une variété de taille de blocs et de clé ce qui le rends très versatile.
+% !!! A completer !!
+
+Le développement de la cryptographie légère a suivi la tendance des nouveaux appareils éléctroniques, comme les smartphone ou les tablettes, pour proposer des algorithmes de chiffrement adaptés à ces nouveaux besoins.
+Ces nouvelle méthodes de chiffrement peuvent être utilisé dans beaucoup de domaines mais on les retrouve essentiellement dans les télécommunications et l'audiovisuel.
+Leurs déveoppements s'accélère avec l'augmentation du nombre des objets interconnectés (« Internet Of Things ») et l'engouement marqué des grandes agences spécialisées dans le domaine comme la NSA et la NIST.
