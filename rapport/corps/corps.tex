@@ -412,10 +412,27 @@
 		\subsection{Performance et sécurité}
 
 			Speck n'a pas été conçu spécifiquement pour atteindre des grandes
-			performances \cite{speck_families}. Comme on peut le constater sur la figure
-			\ref{perfSpeck}, Speck est bien plus lent que AES-256 qui exploite les
-			accélérations matérielles AES-NI disponibles sur les processeurs récent.
-			Ce résultat n'est pas étonent
+			performances \cite{speck_families}. L'objectif premier de cet algorithme
+			est de pouvoir atteindre de bonnes performances sur des petites puces
+			destinées à l'IoT. À cet effet, la foncion de tour de Speck est très simple,
+			cela permet d'avoir des implémentation matérielles plus petites que
+			celles des algorithmes classiques tel que AES.
+
+			\begin{figure}[H]
+				\centering
+				\bgroup
+				\def\arraystretch{1.2}
+				\begin{tabular}{cc|cc|ccc}
+					& & matériel & & logiciel & & \\
+					\hline
+					32 & 64  & 16 & 7 & 2 & 22 \\
+					\hline
+					48 & 72  & 24 & 8 & 3 & 22 \\
+				\end{tabular}
+				\egroup
+				\caption{Taille de blocs/clées possible pour Speck}
+				\label{tailleSpeck}
+			\end{figure}
 
 			\begin{figure}[!h]
 				\centering
