@@ -1,26 +1,141 @@
 % biblatex example
 
 @techreport{speck_iot,
-	title = {Simon and Speck : Block Ciphers for the Internet of Things},
-	pagetotal = {15},
+	title 		= {Simon and Speck : Block Ciphers for the Internet of Things},
+	pagetotal 	= {15},
 	institution = {National Security Agency},
-	author = {{Ray Beaulieu, Douglas Shors, Jason Smith, Stefan Treatman-Clark, Bryan Weeks, Louis Wingers}},
-	date = {2015-06-09},
+	author 		= {{Ray Beaulieu, Douglas Shors, Jason Smith, Stefan Treatman-Clark, Bryan Weeks, Louis Wingers}},
+	date 		= {2015-06-09},
 }
 
 @techreport{speck_design,
-	title = {Notes on the design and analysis of Simon and Speck},
-	pagetotal = {23},
+	title 		= {Notes on the design and analysis of Simon and Speck},
+	pagetotal 	= {23},
 	institution = {International Association for Cryptologic Research},
-	date = {2018-01-13},
+	date 		= {2018-01-13},
 }
 
 @techreport{speck_families,
-	title = {The Simon and Speck families of lightweight block ciphers},
-	pagetotal = {45},
+	title 		= {The Simon and Speck families of lightweight block ciphers},
+	pagetotal 	= {45},
 	institution = {National Security Agency},
-	author = {{Ray Beaulieu, Douglas Shors, Jason Smith, Stefan Treatman-Clark, Bryan Weeks, Louis Wingers}},
-	date = {2013-06-19},
+	author 		= {{Ray Beaulieu, Douglas Shors, Jason Smith, Stefan Treatman-Clark, Bryan Weeks, Louis Wingers}},
+	date 		= {2013-06-19},
+}
+
+@ARTICLE{6275435,
+	author		= {A. Bogdanov and M. Knezevic and G. Leander and D. Toz and K. Varici and I. Verbauwhede},
+	journal		= {IEEE Transactions on Computers},
+	title		= {SPONGENT: The Design Space of Lightweight Cryptographic Hashing},
+	date		= {2013-10},
+	volume		= {62},
+	number		= {10},
+	pages		= {2041-2053},
+	keywords	= {application specific integrated circuits;cryptography;ASIC hardware;SPONGENT;design space;hardware evaluation;lightweight cryptographic hashing;lightweight hash function;open core library;present-type permutation;security analysis;sponge construction;spongent;Hardware;Photonics;Resistance;Standards;Hash function;RFID;lightweight cryptography;low-cost cryptography;low-power design;present;sponge construction;spongent},
+	doi			= {10.1109/TC.2012.196},
+	ISSN		= {0018-9340},
+}
+
+@ARTICLE{PRESENT,
+	author 		= {Bogdanov, Andrey and Knudsen, Lars and Leander, Gregor and Paar, Christof and Poschmann, Axel and J. B. Robshaw, Matthew and Seurin, Yannick and Vikkelsoe, C},
+	year 		= {2007},
+	month 		= {09},
+	pages 		= {450-466},
+	title 		= {PRESENT: an ultra-lightweight block cipher},
+	volume 		= {4727},
+	booktitle 	= {Lect Note. Comput. Sci.}
+}
+
+@ARTICLE{Report_light,
+	author 		= { Kerry A. McKay, Lawrence E. Bassham, Meltem Sonmez Turan, Nicky W. Mouha},
+	date 		= {2017-03-28},
+	pages 		= {27},
+	title 		= {Report on Lightweight Cryptography},
+	institution = {NIST},
+}
+
+@InProceedings{RFID,
+	author		= "Feldhofer, Martin
+	and Dominikus, Sandra
+	and Wolkerstorfer, Johannes",
+	editor		= "Joye, Marc
+	and Quisquater, Jean-Jacques",
+	title		= "Strong Authentication for RFID Systems Using the AES Algorithm",
+	booktitle	= "Cryptographic Hardware and Embedded Systems - CHES 2004",
+	year		= "2004",
+	publisher	= "Springer Berlin Heidelberg",
+	address		= "Berlin, Heidelberg",
+	pages		= "357--370",
+	abstract	= "Radio frequency identification (RFID) is an emerging technology which brings enormous productivity benefits in applications where objects have to be identified automatically. This paper presents issues concerning security and privacy of RFID systems which are heavily discussed in public. In contrast to the RFID community, which claims that cryptographic components are too costly for RFID tags, we describe a solution using strong symmetric authentication which is suitable for today's requirements regarding low power consumption and low die-size. We introduce an authentication protocol which serves as a proof of concept for authenticating an RFID tag to a reader device using the Advanced Encryption Standard (AES) as cryptographic primitive. The main part of this work is a novel approach of an AES hardware implementation which encrypts a 128-bit block of data within 1000 clock cycles and has a power consumption below 9 $\mu$A on a 0.35 $\mu$m CMOS process.",
+	isbn		= "978-3-540-28632-5"
+}
+
+@ARTICLE{SHA1,
+	author		= {Eun-Hee Lee, Je-Hoon Lee, Il-Hwan Park and Kyoung-Rok Cho},
+	journal		= {IEEE Transactions on Computers},
+	title		= {Implementation of high-speed SHA-1 architecture},
+	date		= {2009-08-25},
+	pages		= {2041-2053},
+	publisher 	= {IEICE Electronics Express},
+}
+
+@manual{AES-FIPS,
+  key           = {NIST},
+  organization  = {{National Institute of Standards and Technology}},
+  title         = {Announcing the {Advanced Encryption Standard} ({AES})},
+  year          = {2001},
+  note          = {Federal Information Processing Standards Publication 197, \url{http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf}},
+}
+
+@misc{wiki_gate,
+	author 	= {Wikipedia contributors},
+	title 	= {Gate equivalent},
+	year 	= {2004},
+	url 	= {https://en.wikipedia.org/wiki/Gate_equivalent},
+	note 	= {[En ligne; consulté le 28 Avril 2018]},
+}
+
+@misc{renaud_developpement_2017,
+	title 		= {Le développement des objets connectés : les nouveaux chiffres de 2018},
+	shorttitle 	= {Le développement des objets connectés},
+	url 		= {https://www.objetconnecte.net/objets-connectes-chiffres-etudes-2401/},
+	abstract 	= {Dans les 90’s il y a eu la révolution Internet. Les années 2010 sont celles des objets connectés. Ch},
+	language 	= {fr},
+	urldate 	= {2018-05-30TZ},
+	author 		= {Renaud},
+	date 		= {2017-01},
+}
+
+@online{ultraLightURL,
+	title 	= {Ultra-lightweight encryption method becomes international standard},
+	url 	= {https://nieuws.kuleuven.be/en/content/2012/ultra-lightweight-encryption-method-becomes-international-standard},
+	author 	= {KU LEUVEN},
+}
+
+@online{googleSpongent,
+	title 	= {SPONGENT},
+	url 	= {https://sites.google.com/site/spongenthash/},
+	author 	= {},
+}
+
+@online{appliedCrypto,
+	title	= {Handbook of Applied Cryptography},
+	url 	= {http://cacr.uwaterloo.ca/hac/about/chap6.pdf},
+	author 	= {Alfred J. Menezes, Paul C. van Oorschot, Scott A. Vanstone},
+	year 	= {2001},
+}
+
+@online{7milliards,
+	title 	= {There are officially more mobile devices than people in the world},
+	url 	= {https://www.independent.co.uk/life-style/gadgets-and-tech/news/there-are-officially-more-mobile-devices-than-people-in-the-world-9780518.html},
+	author 	= {Zachary Davies Boren},
+}
+
+@online{NSABackdoor,
+	title 	= {Did NSA Put a Secret Backdoor in New Encryption Standard?},
+	url 	= {https://www.wired.com/2007/11/securitymatters-1115/},
+	author 	= {Bruce Schneier},
+	year 	= {2007},
 }
 
 @misc{cryptoeprint:2012:317,
