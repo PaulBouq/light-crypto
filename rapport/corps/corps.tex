@@ -1,7 +1,7 @@
 \newpage
 \part{Introduction à la cryptographie légère}
 
-		L'objectif de ce projet est d'expliquer le fonctionnement des algorithmes de crypto légère (lightweight cryptography).
+		L'objectif de ce projet est d'expliquer le fonctionnement des algorithmes de cryptographie légère (lightweight cryptography).
 	Il est demandé de choisir deux algorithmes de cryptographie légère, de les expliquer,
 	de les implémenter et de donner des valeurs de performance aussi bien pour des solutions académiques qu'industrielles.
 	Il est également demandé de détailler les domaines d'utilisation de ce type d'algorithme.
@@ -16,10 +16,17 @@
 		milliards d'objets connectés \cite{renaud_developpement_2017}, et ces
 		produits nécessitent d'être sécurisés. Si les ordinateurs et mêmes les
 		smartphones de dernière génération offrent une puissance de calcul
+<<<<<<< HEAD
 		permettant d'implémenter facilement les algorithmes de cryptographie
 		standard, comme par exemple celui du standard AES (algorithme Rinjdael
 		\cite{AES-FIPS}) ou encore RSA, ce n'est pas le cas pour les objets les
 		moins puissants et les plus petits comme par exemple les puces RFID,
+=======
+		permettant d’implémenter facilement les algorithmes de cryptographie
+		standard, comme celui du standard AES (algorithme Rinjdael
+		\cite{AES-FIPS}) ou encore RSA, ce n’est pas le cas pour les objets les
+		moins puissants et les plus petits comme les puces RFID,
+>>>>>>> fin2
 		certains systèmes embarqués ou les réseaux de capteurs (aussi connus sous
 		leur nom anglais « Sensors Networks ») \cite{Report_light}. Cette
 		impossibilité d'utiliser des standards de chiffrement « lourds » provient
@@ -61,7 +68,7 @@
 		une idée plus précise des ordres de grandeur mis en jeu, on peut noter qu'une
 		puce RFID possède une surface généralement comprise entre 1000 et 10000 GE, et
 		seulement 200 à 2000 sont dédiées à la sécurité \cite{Report_light}. Enfin,
-		les algorithmes de chiffrement par blocs en cryptographie légère implémentes
+		les algorithmes de chiffrement par blocs en cryptographie légère implémente
 		des opérations sur les clés de chiffrement beaucoup plus simples et beaucoup
 		moins coûteux qu'en cryptographie standard.
 
@@ -86,6 +93,7 @@
 		vulnérables aux attaques de type « plaintext recovery » ou « key recovery »
 		avec des probabilités non négligeables.
 
+\newpage
 \part{Présentation de deux algorithmes de cryptographie légère}
 
 	\section{SPONGENT}
@@ -218,7 +226,7 @@
 				\label{pLayer}
 			\end{figure}
 
-		\subparagraph{Performances et sécurité}
+		\section{Performances et sécurité}
 
 			Les variantes de SPONGENT peuvent être implémentées en utilisant entre 738
 		GE (pour SPONGENT 80/80/8) et 5100 GE (pour SPONGENT 256/512/256). Ces
@@ -272,97 +280,177 @@
 			\label{attaquePreImage}
 		\end{figure}
 
-		\section{Speck}
+\newpage
 
-			Speck est un algorithme de chiffrement par bloc léger crée par la
-		\textit{National Security Agency} (NSA) et rendu
-		publique en 2013. C'est un algorithme spécialement conçu pour avoir des performances
-		élevées afin d'offrir un algorithme de chiffrement utilisable dans le cadre de
-		"l'Internet of Things".
+\part{Speck}
 
-		\subsection{Algorithmes ARX}
+		Speck est un algorithme de chiffrement par bloc léger crée par la
+	\textit{National Security Agency} (NSA) et rendu
+	publique en 2013. C'est un algorithme spécialement conçu pour avoir des performances
+	élevées afin d'offrir un algorithme de chiffrement utilisable dans le cadre de
+	"l'Internet of Things".
 
-				Cet algorithme fait parti des algorithmes dits ARX, Add-Rotate-Xor. C'est une famille
-			d'algorithmes qui n'utilisent que les opérations d'additions, rotations et ou exclusif
-			dans l'espace $GF_{2^n}$. Il y a plusieurs avantages à se limiter à ces opérations:
+	\subsection{Algorithmes ARX}
 
-			\begin{enumerate}
-			\item[•] Rapidité: ces opérations sont des opérations logiques. Ainsi, elles sont
-				des primitives de tout micro-controlleur et donc sont effectué en un seul
-				cycle d'horloge.
-			\item[•] Sécurité matérielle: le fait que toutes les opérations soient des opérations
-				logiques atomiques permet à ces algorithmes de fonctionner en temps constant.
-				Prévenant les attaques par canaux cachés basés sur les mesures de temps.
-			\item[•] Implémentation: ces algorithmes sont souvent très simples. Leur implémentation
-				qu'elle soit logicielle ou matérielle est très simple. Par conséquent, le
-				temps de développement et le coût de leur implémentation est très faible.
-			\end{enumerate}
+			Cet algorithme fait partie des algorithmes dits ARX, Add-Rotate-Xor. C'est une famille
+		d'algorithmes qui n'utilisent que les opérations d'additions, rotations et ou exclusif
+		dans l'espace $GF_{2^n}$. Il y a plusieurs avantages à se limiter à ces opérations:
 
-		\subsection{Fonctionnement de Speck}
+		\begin{enumerate}
+		\item[•] Rapidité: ces opérations sont des opérations logiques. Ainsi, elles sont
+			des primitives de tout micro-contrôleur et donc sont effectué en un seul
+			cycle d'horloge.
+		\item[•] Sécurité matérielle: le fait que toutes les opérations soient des opérations
+			logiques atomiques permet à ces algorithmes de fonctionner en temps constant.
+			Prévenant les attaques par canaux cachés basés sur les mesures de temps.
+		\item[•] Implémentation: ces algorithmes sont souvent très simples. Leur implémentation
+			qu'elle soit logicielle ou matérielle est très simple. Par conséquent, le
+			temps de développement et le coût de leur implémentation est très faible.
+		\end{enumerate}
 
-			Avant de détailler comment fonctionne Speck, considérons les notations suivantes:
+	\subsection{Fonctionnement de Speck}
 
-			\begin{enumerate}
-			  \item[•] Le ou-exclusif bit à bit, noté xor
-			  \item[•] L'addiction modulo $2^n$, noté $\xor$
-			  \item[•] Les rotations circulaires à gauche et à droite respectivement notées,
-			    $S^i$ et $S^{-i}$ pour des rotations de i-bits.
-			\end{enumerate}
+		Avant de détailler comment fonctionne Speck, considérons les notations suivantes:
 
-			Un tour de chiffrement de l'algorithme Speck est définit de la façon suivante. \\
-			Pour $k \in GF(2^n)$ une clée, le tour de chiffrement est définit par la fonction suivante:
+		\begin{enumerate}
+		  \item[•] Le ou-exclusif bit à bit, noté xor
+		  \item[•] L'addiction modulo $2^n$, noté $\xor$
+		  \item[•] Les rotations circulaires à gauche et à droite respectivement notées,
+		    $S^i$ et $S^{-i}$ pour des rotations de i-bits.
+		\end{enumerate}
+
+		Un tour de chiffrement de l'algorithme Speck est définit de la façon suivante \cite{speck_families}. \\
+		Pour $k \in GF(2^n)$ une clé, le tour de chiffrement est définit par la fonction suivante:
+
+		\begin{figure}[H]
+			\centering
 			\[
 			\begin{array}{ccccc}
-			R_k & : & GF(2^n) x GF(2^n) & \to & GF(2^n) x GF(2^n) \\
+			R_k & : & GF(2^n)^2 & \to & GF(2^n)^2 \\
 			 & & (x,y) & \mapsto & ((S^{-\alpha}(x) + y) \xor k, S^\beta (y) \xor (S^{-\alpha} + y) \xor k) \\
 			\end{array}
 			\]
+			\caption{Fonction tour de Speck}
+			\label{tourSpeck}
+		\end{figure}
 
-			avec $\alpha$ = 7 et $\beta$ = 2 si n = 16, $\alpha $= 8 et $\beta$ = 3 sinon. \\
 
-			La fonction de déchiffrement est définie par:
+
+		avec $\alpha$ et $\beta$ des paramètres dépendants de la taille des blocs utilisés. \\
+
+		La fonction de déchiffrement est définie par:
+
+		\begin{figure}[H]
+			\centering
 			\[
 			\begin{array}{ccccc}
-			R_k^{-1} & : & GF(2^n) x GF(2^n) & \to & GF(2^n) x GF(2^n) \\
+			R_k^{-1} & : & GF(2^n)^2 & \to & GF(2^n)^2 \\
 			 & & (x,y) & \mapsto & (S^\alpha ((x \xor k) - S^{-\beta}(x \xor y)), S^{-\beta}(x \xor y)) \\
 			\end{array}
 			\]
+			\caption{Fonction inverse tour de Speck}
+			\label{tourSpeck}
+		\end{figure}
 
-			On peut représenter un tour de Speck de la façon suivante:
 
-			\begin{figure}[!h]
+		On peut également représenter un tour de Speck de la façon suivante:
+
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.8\textwidth]{imgs/roundSpeck.png}
+			\caption{i-ème tour de Speck}
+		 	\label{roundSpeck}
+		\end{figure}
+
+		\vspace{0.3cm}
+
+		La clé initiale est dérivée par une fonction de dérivation qui utilise la
+		fonction de tour de chiffrement. Considérons une clé de m mots ($m\in {2,3,4}$),
+		on peut écrire $ K = (l_{m-2},k_{m-2}, ..., l_0,k_0)$, les clés $k_i$ issues
+		de l'extension de la clé sont définies par:
+
+		\begin{figure}[H]
+			\centering
+			\[
+				l_{i+m-1} = (l_i + S^{-\alpha}(l_i)) \xor i
+			\]
+			\[
+				k_{i+1} = S^\beta (k_i) \xor l_{i+m-1}
+			\]
+			\caption{Fonction inverse tour de Speck}
+			\label{tourSpeck}
+		\end{figure}
+
+			Plusieurs paramètres entrent en jeu dans l'algorithme complet. À savoir
+		la taille de bloc, la taille de la clé, la taille des mots utilisés,
+		le nombre de tours, $\alpha$ et $\beta$. On dispose de plusieurs variantes
+		de Speck en faisant varier ces paramètres parmi ceux suggérés par la NSA \cite{speck_iot}:
+
+
+
+		\vspace{0.5cm}
+
+		\begin{figure}[H]
+			\centering
+			\bgroup
+			\def\arraystretch{1.2}
+			\begin{tabular}{ccc|cc|c}
+				taille de bloc & taille de clé & taille de mot & $\alpha$ & $\beta$ & nombre de tours \\
+				\hline
+				32 & 64  & 16 & 7 & 2 & 22 \\
+				\hline
+				48 & 72  & 24 & 8 & 3 & 22 \\
+				48 & 96  &  & & & 23 \\
+				\hline
+				64 & 96  & 32 & 8 & 3 & 26 \\
+				64 & 128 & &  & & 27 \\
+				\hline
+				96 & 96  & 48 & 8 & 3 & 28 \\
+				96 & 144 & & & & 29 \\
+				\hline
+				128 & 128 & 64 & 8 & 3 & 32 \\
+				128 & 192 & & & & 33 \\
+				128 & 256 & & & & 34 \\
+			\end{tabular}
+			\egroup
+			\caption{Taille de blocs/clés possible pour Speck}
+		 	\label{tailleSpeck}
+		\end{figure}
+
+		\vspace{0.5cm}
+
+		\subsection{Performance et sécurité}
+
+			Speck n'a pas été conçu spécifiquement pour atteindre des grandes
+			performances \cite{speck_families}. L'objectif premier de cet algorithme
+			est de pouvoir atteindre de bonnes performances sur des petites puces
+			destinées à l'IoT. À cet effet, la foncion de tour de Speck est très simple,
+			cela permet d'avoir des implémentations matérielles plus petites que
+			celles des algorithmes classiques tel que AES. La figure \ref{perfSpeck}
+			présente des résultats de tests du rapport \cite{speck_micro} publié par la NSA,
+			Speck est près de 5 fois plus lent que Speck pour une implémentation matérielle
+			ASIC, l'implémentation Speck ne prend que 1396 GE alors que AES
+			nécessite 2400 GE.
+
+			\begin{figure}[H]
 				\centering
-				\includegraphics[width=0.9\textwidth]{imgs/roundSpeck.png}
-				\caption{i-ème tour de Speck}
-			 	\label{roundSpeck}
-			\end{figure}
-
-			\vspace{0.3cm}
-
-			Speck pour utiliser un grand nombre de tailles de blocs ainsi que de clées.
-
-			\vspace{0.5cm}
-
-			\begin{figure}[!h]
-				\centering
-				\begin{tabular}{cc}
-					taille de bloc & taille de clée \\
+				\bgroup
+				\def\arraystretch{1.2}
+				\begin{tabular}{cc|cc}
+					& & \textbf{matériel} & \\
 					\hline
-					32 & 64 \\
+					Tailles & nom & taille (GE) & débit (ko/s)\\
 					\hline
-					48 & 72,96 \\
+					128/128 & Speck  & 1396 & 12.1 \\
 					\hline
-					64 & 96,128 \\
-					\hline
-					96 & 96,144 \\
-					\hline
-					128 & 128,192,256 \\
-					\hline
+					 & AES  & 2400 & 56.6 \\
 				\end{tabular}
-				\caption{Taille de blocs/clées possible pour Speck}
-			 	\label{tailleSpeck}
+				\egroup
+				\caption{Performance d'implémentation ASIC sur micro-contrôleur 8-bit avec 100 kHz d'horloge \cite{speck_iot}}
+				\label{tailleSpeck}
 			\end{figure}
 
+<<<<<<< HEAD
 			\vspace{0.5cm}
 
 			\part{Domaines d'application}
@@ -410,10 +498,21 @@
 			Le, très connu, AES est un algorithme de chiffrement par bloc.
 			
 			\begin{figure}[!h]
+=======
+			Cependant, à matériel égal, Speck atteint de bonnes grandes vitesses à matériel
+			égal. On remarque que Speck est plus lent pour le couple taille bloc,clé
+			(128,128) mais plus rapide en fonctionnement par flux avec le couple (128,256).
+			Quelle que soit la performance, Speck l'algorithme le plus économe en mémoire.
+
+
+			\begin{figure}[H]
+>>>>>>> fin2
 				\centering
-				\includegraphics[width=0.9\textwidth]{imgs/application/IOT.jpg}
-				\label{IOT}
+				\includegraphics[width=0.8\textwidth]{imgs/perfSpeck.png}
+				\caption{Comparaison entre Speck et d'autres algorithmes de chiffrement par bloc et par flux, effectué sur ATmega128 \cite{speck_micro}}
+				\label{perfSpeck}
 			\end{figure}
+<<<<<<< HEAD
 			
 			Les deux algorithmes présentés dans les parties précédentes sont des méthodes de chiffrement par blocs.
 			Speck a été dévloppé, depuis 2012, par la NSA et optimisé pour une utilisation logicielle, tandis que sa contrepartie, Simon, a été optimisé pour une utilisation matérielle.
@@ -436,9 +535,30 @@
 			
 			Le chiffrement de flux semble être privilégié car il permettrait de sécuriser la communication des objets interconnectés de l'« Internet Of Things », le défi technologique des décennies à venir.
 			Cet attrait est d'autant plus accentué par l'engouement de grandes institutions américaines sur le sujet comme la NSA, avec ses deux algorithmes Speck et Simon, et la NIST (National Institute of Standards and Technology) qui organisent des ateliers sur le sujet.
+=======
+
+			Ces résultats confirment donc l'intérêt de Speck pour l'IoT du fait de performances
+			raisonnables élevées tout en pouvant être implémenté plus simplement et de façon
+			plus économique que	les algorithmes classiques tel que AES.  \\
+
+			Concernant la sécurité de Speck, la meilleure attaque sur Speck connue
+			jusqu'à présent est une méthode de cryptographie différentielle qui peut
+			casser 25 des 35 tours de Speck 128,256 avec une complexité temporelle de
+			$2^253$ \cite{speck_attack} ce qui est bien au delà du raisonnablement inatteignable.
+			Cependant, les auteurs de cette même attaques ont montré que 14 des 24
+			tours de Speck 32/64 peuvent être attaqués avec une compléxité temporelle $2^63$. \\
+
+
+			Le fait que Speck soit un algorithme ARX
+			et qu'il n'utilise pas de \textit{look-up tables} le prémunie contre
+			les attaques par attaques temporel ainsi que celles qui se basent sur les
+			timings d'accès au cache \cite{speck_design}. L'attaque matérielle
+			la plus dangereuse est l'analyse de puissance.
+>>>>>>> fin2
 
 	
 \newpage
+<<<<<<< HEAD
 \part*{Conclusion générale}
 
 La cryptographie légère est une branche de la cryptopgraphie apparue récemment et qui s'est développé avec l'apparition de nouveaux appareils éléctroniques de puissances moindres que les ordinateurs classiques.
@@ -460,3 +580,152 @@ Tout comme Spongent, Speck peut utiliser une variété de taille de blocs et de 
 Le développement de la cryptographie légère a suivi la tendance des nouveaux appareils éléctroniques, comme les smartphone ou les tablettes, pour proposer des algorithmes de chiffrement adaptés à ces nouveaux besoins.
 Ces nouvelle méthodes de chiffrement peuvent être utilisé dans beaucoup de domaines mais on les retrouve essentiellement dans les télécommunications et l'audiovisuel.
 Leurs déveoppements s'accélère avec l'augmentation du nombre des objets interconnectés (« Internet Of Things ») et l'engouement marqué des grandes agences spécialisées dans le domaine comme la NSA et la NIST.
+=======
+\part{Domaines d'application}
+
+	\section{Introduction}
+
+
+	Depuis quelques années, nous pouvons apercevoir un changement dans la
+	puissance des appareils électroniques. En effet, on passe d'ordinateur à usage
+	général à des appareils dédiés avec des ressources limités. Ce changement
+	apporte un large éventail de préoccupations en matière de sécurité et de
+	protection de la vie privée. C'est pourquoi il est nécessaire de créer de
+	nouveaux standards spécialement adaptés à ces conditions.
+
+	Ces nouveaux standards visent essentiellement à utiliser le minimum de GE tout
+	en gardant un niveau de sécurité accceptable pour les applications visées. Les
+	questions de consommation de puissance et de rapidité sont aussi à prendre en
+	compte. En effet, ces appareils seront destinés à communiquer avec d'autres au
+	sein d'un réseau ou utiliser des batteries.
+
+	Il y a déjà plusieurs domaines dans lesquels de tels appareils sont
+	interconnectés et travaillent de concert pour accomplir certaines tâches.
+	Tel que: les réseaux de capteurs, les systèmes de contrôles
+	distribués, l'Internet Of Thigs (IoT), le « smart grid », les systèmes
+	embarqués ou encore les dispositifs RFID.
+
+	\subsection{Chiffrement de flux}
+
+	Dans cette partie, on s'intéressera uniquement aux méthodes de chiffrement
+	de flux. Le chiffrement par flot est caractérisé par sa capacité à « chiffrer
+	les caractères (généralement des chiffres binaires) d'un message en clair, un à
+	la fois, en utilisant une transformation de chiffrement qui varie avec le
+	temps »\cite{appliedCrypto}.
+
+	\begin{figure}[!h]
+		\centering
+		\includegraphics[width=0.9\textwidth]{imgs/application/A5.png}
+		\caption{Fonctionnement de l'algorithme A5/1.}
+		\label{algoA5}
+	\end{figure}
+
+	Les méthodes de chiffrement de flux sont naturellement utilisées dans les
+	domaines des télécommunications et de l'audiovisuel. Par exemple, les
+	communications qui utilisent le protocole 2G GSM sont chiffrés par
+	l'algorithme A5/1. A5/1 est largement utilisé en Europe et aux État-Uni et
+	permet à plus de 7 milliards de téléphone de communiquer de manière
+	sécurisé\cite{7milliards}. Les communications de téléphonie par satellite
+	posssède aussi ses propres algorithmes de chiffrement. De tels algorithmes
+	sont jalousement gardés par les constructeurs et peu d'entre eux ont été percé à
+	jour, que ce soit avec des attaques classiques ou du « reverse engineering ».
+
+	Des algorithmes de chiffrement de flux sont aussi utilisés lors de la lecture
+	de contenu sur certains dvd. Ces dvd sont souvent chiffrés avec l'algorithme
+	Content Scrambling System (Css). Ce genre d'algorithme a été développé pour
+	implémenter les Digital Rights Managements (DRM). Ces mesures permettent de
+	protéger à la fois l'accès au contenu mais aussi contre les systèmes de copie.
+	\section{Chiffrement par bloc}
+
+	La deuxième grande famille de méthode de chiffrement est le chiffrement par
+	bloc. Il consiste à découper les données à chiffrer en blocs puis de chiffrer
+	ces blocs. Le, très connu, AES est un algorithme de chiffrement par bloc.
+
+	\begin{figure}[!h]
+		\centering
+		\includegraphics[width=0.9\textwidth]{imgs/application/IOT.jpg}
+		\label{IOT}
+	\end{figure}
+
+	Les deux algorithmes présentés dans les parties précédentes sont des méthodes
+	de chiffrement par blocs. Speck a été développé, depuis 2012, par la NSA et
+	optimisé pour une utilisation logicielle, tandis que sa contrepartie, Simon, a
+	été optimisé pour une utilisation matérielle. De plus, il offre de très bonnes
+	performances même sur des machines à faible puissance de calcul. En effet, il
+	peut être implémenté sur des micro-contrôleur de 8 bits. Cet algorithme a été
+	développé en vue d'être intégré dans des objets de l'« Internet Of Things ».
+	Enfin, Linux a ajouté le support SPECK pour un cryptage efficace et
+	opportuniste sur les périphériques à faibles ressources au noyau en février
+	2018.
+
+	Mais de nombreuses voix s'élèvent contre la NSA et leurs algorithmes,
+	notamment l'ISO (International Organization for Standardization).
+	L'organisation internationale n'a pas confiance en la NSA et ses bonnes
+	intentions. Sa crédibilité est fortement réduite après l'affaire Snowden et
+	les preuves accusant l'agence de sécurité américaine d'avoir poussé la
+	standardisation d'un algorithme de chiffrement (Dual EC DRBG) qui s'est
+	révélé, plus tard, être « back-doored »\cite{NSABackdoor}.
+
+	Un autre algorithme de chiffrement par bloc utilisé de manière commerciale est
+	l'algorithme Cryptomeria, souvent appelé « C2 » dans la littérature. Il est
+	utilisé dans les lecteurs de dvd et des cartes SD. Il peut être vu comme le
+	successeur de Css car il vise à remplir la même fonction, c'est-à-dire
+	protéger l'accès au contenu et lutter contre les systèmes de copie.
+	\section{Conclusion}
+
+	 Il y a deux grandes familles d'algorithmes de chiffrement : de flux et par
+	bloc. On retrouve les deux types d'algorithmes dans des domaines variés comme
+	les télécommunications, l'audiovisuel, \dots
+
+	Le chiffrement de flux semble être privilégié car il permettrait de sécuriser
+	la communication des objets interconnectés de l'« Internet Of Things », le
+	défi technologique des décennies à venir. Cet attrait est d'autant plus
+	accentué par l'engouement de grandes institutions américaines sur le sujet
+	comme la NSA, avec ses deux algorithmes Speck et Simon, et la NIST (National
+	Institute of Standards and Technology) qui organisent des ateliers sur le
+	sujet.
+
+\newpage
+\part*{Conclusion générale}
+
+	La cryptographie légère est une branche de la cryptographie apparue récemment
+	et qui s'est développé avec l'apparition de nouveaux appareils électroniques de
+	puissances moindres que les ordinateurs classiques. Comme leurs puissances est
+	plus faibles les algorithmes classiques (RSA, AES) sont trop coûteux pour ces
+	appareils, il a donc fallu passer à des algorithmes plus « léger » et mieux
+	adaptés à ces appareils. Il faut tout de même noter que ces algorithmes
+	présentent, par design, des faiblesses à certaines attaques. Deux algorithmes de
+	chiffrement par bloc ont été présentés dans ce rapport : Spongent et Speck.
+
+	Spongent s'appuie sur l'algorithme PRESENT qui a été inclus au dernier standard
+	international des méthodes de cryptographie légère par l’ « International
+	Electrotechnical Commission ». Il en existe treize variantes, dont SPONGENT 160 /
+	160 / 80 que nous avons implémenté en python. Cet algorithme peut être
+	implementé en utilisant entre 738 et 5100 GE, ce qui montre la compacité
+	physique des implémentations. Les algorithmes de cryptographie légère se
+	démarquent aussi par leurs débits élevés. Pour le SPONGENT, on peut atteindre
+	2Gps. En comparaison, SHA-1 a un débit de l'ordre de 1Gps. En termes de
+	sécurité, pour certaines variantes sont « sûrs » tandis que d'autres ne le sont
+	pas (88/80/8 et 128/128/8).
+
+	Le 2\up{ème} algorithme est Speck, développé par la NSA et rendu publique en
+	2013. Il a été spécialement conçu pour être utilisé dans le cadre de l'«
+	Internet Of Things ». Tout comme Spongent, Speck peut utiliser une variété de
+	taille de blocs et de clé ce qui le rend très versatile. On peut l'utilise pour
+	le l'IoT sur des circuits ayant des contraintes de tailles très fortes ou de
+	façon plus classique sur des processeurs avec lesquels ses performances sont
+	très élevés. Concernant la sécurité, à l'heure actuelle, Speck est un algorithme
+	très sûr. Cependant, le fait qu'il soit peu répandu et le fait peut cacher des
+	vulnérabilités contrairement à un algorithme tel que AES qui a été tellement
+	attaqué que l'on peut raisonnablement le considérer sûr.
+
+
+	 Le développement de la cryptographie légère a suivi la tendance des nouveaux
+	appareils électroniques, comme les smartphones ou les tablettes, pour proposer
+	des algorithmes de chiffrement adaptés à ces nouveaux besoins. Ces nouvelles
+	méthodes de chiffrement peuvent être utilisé dans beaucoup de domaines mais on
+	les retrouve essentiellement dans les télécommunications et l'audiovisuel.
+	Leurs développements s'accélèrent avec l'augmentation du nombre des objets
+	interconnectés (« Internet Of Things ») et l'engouement marqué des grandes
+	agences spécialisées dans le domaine comme la NSA et la NIST.
+>>>>>>> fin2
